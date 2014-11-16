@@ -14,6 +14,25 @@ class Checkins extends Model
 		$this->database->insert("checkins", $checkin);
 	}
 
+	public function get($id)
+	{
+		if ($this->exists($id))
+		{
+			$rows = $this->database->get("checkins", "`id` = '$id'");
+			$row = $rows[0];
+			$checkin = new stdClass;
+
+			foreach($row as $k => $v)
+			{
+				$checkin->$k = $v;
+			}
+
+			return $checkin;
+		}
+		else
+			return null;
+	}
+
 	public function update($id, $meal, $comments, $rating, $complete = false)
 	{
 		$checkin = array(
