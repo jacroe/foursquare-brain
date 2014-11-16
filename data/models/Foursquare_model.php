@@ -21,4 +21,40 @@ class Foursquare extends Model
 
 		return $data->response->checkins->items[0];
 	}
+
+	public function addCategories()
+	{
+		$oauth = $this->oauth;
+		$date = date("Ymd");
+		$data = json_decode(file_get_contents("https://api.foursquare.com/v2/venues/categories?oauth_token=$oauth&v=$date"));
+
+		$catsToAdd = array();
+
+		foreach($data->response->categories as $c)
+		{
+			if ($c->name == "Shop & Service")
+			{
+				foreach($c->categories as $sc)
+				{
+					if ($sc->name == "Food & Drink Shop")
+					{
+						foreach($sc->categories as $ssc)
+						{
+							$catsToAdd[] = $ssc;
+						}
+						break;
+					}
+				}
+			}
+			elseif ($c->name == "Food")
+			{
+				foreach($c->categories as $sc)
+				{
+					$catsToAdd[] = $sc;
+				}
+			}
+		}
+		foreach($catsToAdd as $c)
+			$this->database->insert("categories", array("id"=>$c->id, "name"=>$c->name, "icon"=>$c->icon->prefix));
+	}
 }
