@@ -23,12 +23,15 @@ class Places extends Model
 
 	public function put($placeObj)
 	{
-		$place = array(
-			"id" => $placeObj->id,
-			"name" => $placeObj->name,
-			"location" => $placeObj->location->address." ".$placeObj->location->formattedAddress[1],
-			"category" => $placeObj->categories[0]->name
-		);
-		$this->database->insert("places", $place);
+		if (!$this->database->numRows("places", "`id` = '{$placeObj->id}'"))
+		{
+			$place = array(
+				"id" => $placeObj->id,
+				"categoryID" => $placeObj->categories[0]->id,
+				"name" => $placeObj->name,
+				"location" => $placeObj->location->address." ".$placeObj->location->formattedAddress[1]
+			);
+			$this->database->insert("places", $place);
+		}
 	}
 }
