@@ -14,7 +14,7 @@
 				<tbody>
 {{foreach from=$places key=i item=place}}
 					<tr>
-						<td>{{$place->name}}</td>
+						<td><a href="https://foursquare.com/v/{{$place->id}}" target=_blank>{{$place->name}}</a></td>
 						<td>{{$place->location}}</td>
 						<td>{{$place->category->name}}</td>
 						<td><a href="checkins.php?id={{$place->id}}">{{$place->checkins}}</a></td>
