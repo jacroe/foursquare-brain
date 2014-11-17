@@ -27,10 +27,34 @@ class Checkins extends Model
 				$checkin->$k = $v;
 			}
 
+			$checkin->time = date("M j, Y g:ia", $checkin->time);
+
 			return $checkin;
 		}
 		else
 			return null;
+	}
+
+	public function getByPlaceID($placeID)
+	{
+		$rows = $this->database->get("checkins", "`placesID` = '$placeID'");
+		$checkins = array();
+
+		foreach($rows as $row)
+		{
+			$checkin = new stdClass;
+
+			foreach($row as $k => $v)
+			{
+				$checkin->$k = $v;
+			}
+
+			$checkin->time = date("M j, Y g:ia", $checkin->time);
+
+			$checkins[] = $checkin;
+		}
+
+		return $checkins;
 	}
 
 	public function update($id, $meal, $comments, $rating, $complete = false)
