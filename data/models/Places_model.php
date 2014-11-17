@@ -6,41 +6,17 @@ class Places extends Model
 	{
 		$rows = $this->database->get("places", "`id` = '$id'");
 		if ($rows)
-		{
-			$row = $rows[0];
-			$place = new stdClass;
-
-			foreach($row as $k => $v)
-			{
-				$place->$k = $v;
-			}
-
-			$place->category = $this->_getCategoryInfo($place->categoryID);
-			unset($place->categoryID);
-
-			return $place;
-		}
-
+			return $this->_format($rows[0]);
 		return false;
 	}
 
 	public function getAll()
 	{
-		$rows = $this->database->get("places");
+		$rows = $this->database->get("places", "1 ORDER BY `name`");
 		$places = array();
 		foreach($rows as $row)
 		{
-			$place = new stdClass;
-
-			foreach($row as $k => $v)
-			{
-				$place->$k = $v;
-			}
-
-			$place->category = $this->_getCategoryInfo($place->categoryID);
-			unset($place->categoryID);
-
-			$places[] = $place;
+			$places[] = $this->_format($row);
 		}
 
 		return $places;
@@ -72,5 +48,20 @@ class Places extends Model
 		}
 
 		return $category;
+	}
+
+	private function _format($row)
+	{
+		$place = new stdClass;
+
+		foreach($row as $k => $v)
+		{
+			$place->$k = $v;
+		}
+
+		$place->category = $this->_getCategoryInfo($place->categoryID);
+		unset($place->categoryID);
+
+		return $place;
 	}
 }

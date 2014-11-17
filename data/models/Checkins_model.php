@@ -19,17 +19,7 @@ class Checkins extends Model
 		if ($this->exists($id))
 		{
 			$rows = $this->database->get("checkins", "`id` = '$id'");
-			$row = $rows[0];
-			$checkin = new stdClass;
-
-			foreach($row as $k => $v)
-			{
-				$checkin->$k = $v;
-			}
-
-			$checkin->time = date("M j, Y g:ia", $checkin->time);
-
-			return $checkin;
+			return $this->_format($rows[0]);
 		}
 		else
 			return null;
@@ -41,18 +31,7 @@ class Checkins extends Model
 		$checkins = array();
 
 		foreach($rows as $row)
-		{
-			$checkin = new stdClass;
-
-			foreach($row as $k => $v)
-			{
-				$checkin->$k = $v;
-			}
-
-			$checkin->time = date("M j, Y g:ia", $checkin->time);
-
-			$checkins[] = $checkin;
-		}
+			$checkins[] = $this->_format($row);
 
 		return $checkins;
 	}
@@ -72,5 +51,19 @@ class Checkins extends Model
 	public function exists($checkinID)
 	{
 		return (bool)$this->database->numRows("checkins", "`id` = '$checkinID'");
+	}
+
+	private function _format($row)
+	{
+		$checkin = new stdClass;
+
+		foreach($row as $k => $v)
+		{
+			$checkin->$k = $v;
+		}
+
+		$checkin->time = date("M j, Y g:ia", $checkin->time);
+
+		return $checkin;
 	}
 }
