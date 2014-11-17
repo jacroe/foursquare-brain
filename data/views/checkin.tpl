@@ -28,7 +28,7 @@
 						<select class="form-control" id="rating" name="rating">
 						  <option value=5{{if $checkin->rating == 5}} selected{{/if}}>5 - *giggles*</option>
 						  <option value=4{{if $checkin->rating == 4}} selected{{/if}}>4 - Mmmm...</option>
-						  <option value=3{{if $checkin->rating == 3}} selected{{/if}}>3 - Meh</option>
+						  <option value=3{{if $checkin->rating == 3 || $checkin->rating == null}} selected{{/if}}>3 - Meh</option>
 						  <option value=2{{if $checkin->rating == 2}} selected{{/if}}>2 - Blech</option>
 						  <option value=1{{if $checkin->rating == 1}} selected{{/if}}>1 - ...hergh</option>
 						</select>
