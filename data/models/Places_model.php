@@ -17,10 +17,33 @@ class Places extends Model
 
 			$place->category = $this->_getCategoryInfo($place->categoryID);
 			unset($place->categoryID);
+
 			return $place;
 		}
 
 		return false;
+	}
+
+	public function getAll()
+	{
+		$rows = $this->database->get("places");
+		$places = array();
+		foreach($rows as $row)
+		{
+			$place = new stdClass;
+
+			foreach($row as $k => $v)
+			{
+				$place->$k = $v;
+			}
+
+			$place->category = $this->_getCategoryInfo($place->categoryID);
+			unset($place->categoryID);
+
+			$places[] = $place;
+		}
+
+		return $places;
 	}
 
 	public function put($placeObj)
