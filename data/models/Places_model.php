@@ -15,6 +15,8 @@ class Places extends Model
 				$place->$k = $v;
 			}
 
+			$place->category = $this->_getCategoryInfo($place->categoryID);
+			unset($place->categoryID);
 			return $place;
 		}
 
@@ -33,5 +35,19 @@ class Places extends Model
 			);
 			$this->database->insert("places", $place);
 		}
+	}
+
+	private function _getCategoryInfo($id)
+	{
+		$rows = $this->database->get("categories", "`id` = '$id'");
+		$row = $rows[0];
+		$category = new stdClass;
+
+		foreach($row as $k => $v)
+		{
+			$category->$k = $v;
+		}
+
+		return $category;
 	}
 }
