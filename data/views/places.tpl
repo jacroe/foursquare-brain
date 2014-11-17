@@ -1,6 +1,7 @@
-{{include file="header.tpl" include_nav=true}}
+{{include file="header.tpl" include_nav=true title="Places"}}
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12 col-sm-8">
+			<h1>Places</h1>
 			<table class="table table-striped table-hover table-condensed" id="placesTable">
 				<thead>
 					<tr>

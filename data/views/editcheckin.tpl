@@ -1,7 +1,7 @@
-{{include file="header.tpl" include_nav=true}}
+{{include file="header.tpl" include_nav=true title="Editing Checkin at {{$checkin->place->name}}"}}
 	<div class="row marketing">
 		<div class="col-lg-12">
-			<h1>Edit checkin for <a href="https:/foursquare.com/v/{{$checkin->place->id}}" target=_blank>{{$checkin->place->name}}</a></h1>
+			<h1>Edit Checkin <small>{{$checkin->place->name}} on {{$checkin->time}}</small></h1>
 {{foreach $msgs as $msg}}
 			<div class="alert alert-{{if $msg.type}}{{$msg.type}}{{else}}danger{{/if}} alert-dismissable col-sm-offset-3 col-sm-9">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -43,7 +43,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
-						<button type="submit" class="btn btn-primary">Update</button>
+						<button type="submit" class="btn btn-primary">Update</button> <a href="checkins.php?id={{$checkin->place->id}}">Cancel</a>
 					</div>
 				</div>
 			</form>

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Foursquare Brain</title>
+	<title>{{if $title}}{{$title}} | {{/if}}Foursquare Brain</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="{{$ROOT_PATH}}inc/css/jumbotron-narrow.css" />
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Pacifico" />
@@ -29,14 +29,15 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand b-logo" href="index.php">Brain</a>
+				<a class="navbar-brand b-logo" href="places.php">Brain</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
+					<!--<li><a href="places.php">View Places</a></li>
 					<li><a href="settings.php">Settings</a></li>
 					<li><a href="#">About</a></li>
-					<li><a href="logout.php">Logout</a></li>
+					<li><a href="logout.php">Logout</a></li>-->
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
