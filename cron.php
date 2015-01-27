@@ -9,9 +9,8 @@ foreach($info as $i)
 		$lastCheckin = $i["value"];
 }
 
-if ($checkin->id != $lastCheckin)
+if ($checkin && $checkin->id != $lastCheckin)
 {
-		file_put_contents("log".date('ymdhis').".txt", json_encode($checkin));
 	if (!$_->places->get($checkin->venue->id))
 	{
 		$newPlace = true;
