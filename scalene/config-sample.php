@@ -1,4 +1,7 @@
 <?php
+
+date_default_timezone_set("America/New_York");
+
 $config["load"]["core"][] = "database";
 $config["load"]["core"][] = "email";
 $config["load"]["library"][] = "pushover";
